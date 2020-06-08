@@ -38,7 +38,7 @@ jobs:
                     composer global require drush/drush:8.*
             -   run: |
                     # Download the latest Drupal core project and all its dependencies
-                    composer create-project srijanone/ezcontent-project:8.x-dev ../docroot --no-interaction --no-progress
+                    composer create-project srijanone/ezcontent-project:8.x-dev docroot --no-interaction --no-progress
             -   run: |
                     # Setting up the stage.
                     COMPOSER_MEMORY_LIMIT=-1 composer update
