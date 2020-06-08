@@ -1,12 +1,12 @@
-name: local_package_run_rector
+name: local_package_run_drupal
 
 # This test will run on every pull request, and on every commit on any branch
 on:
         [push, pull_request]
 
 jobs:
-    run_rector_on_rector_examples_module:
-        name: Run Drupal Rector
+    run_build_process:
+        name: Run Drupal Ezcontent
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
@@ -15,6 +15,17 @@ jobs:
                     php-version: 7.3
                     coverage: none # disable xdebug, pcov
                     extensions: "intl"
+            -   uses: mirromutth/mysql-action@v1.1
+                with:
+                    host port: 3800 # Optional, default value is 3306. The port of host
+                    container port: 3307 # Optional, default value is 3306. The port of container
+                    character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
+                    collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
+                    mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
+                    mysql database: 'testdb' # Optional, default value is "test". The specified database which will be create
+                    mysql root password: ${{ secrets.RootPassword }} # Required if "mysql user" is empty, default is empty. The root superuser password
+                    mysql user: 'developer' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
+                    mysql password: ${{ secrets.DatabasePassword }} # Required if "mysql user" exists. The password for the "mysql user"
 
 #           Uncomment to enable SSH access to Github Actions - https://github.com/marketplace/actions/debugging-with-tmate#getting-started
 #            - name: Debugging with tmate
