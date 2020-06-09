@@ -33,6 +33,7 @@ jobs:
             -   run: |
                     # Download the composer plugin that downloads packages in parallel to speed up the installation process.
                     composer global require hirak/prestissimo
+                    composer global require zaporylie/composer-drupal-optimizations:^1.1
             -   run: |
                     # Download the drush packages
                     composer global require drush/drush:8.*
@@ -41,7 +42,7 @@ jobs:
                     composer create-project srijanone/ezcontent-project:8.x-dev docroot --no-interaction --no-progress
             -   run: |
                     # Setting up the stage.
-                    COMPOSER_MEMORY_LIMIT=-1 composer update
+                    # COMPOSER_MEMORY_LIMIT=-1 composer update
                     mkdir -p docroot/sites/default/files
                     chmod -R 777 docroot/sites/default/files
                     mkdir -p private-files
